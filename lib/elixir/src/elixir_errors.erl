@@ -21,7 +21,8 @@
 %% Called by deprecated Kernel.ParallelCompiler.print_warning.
 print_warning(Position, File, Message) ->
   Output = format_snippet(Position, File, Message, nil, warning, [], nil),
-  io:put_chars(standard_error, [Output, $\n, $\n]).
+  ok.
+  %io:put_chars(standard_error, [Output, $\n, $\n]).
 
 %% Called by Module.ParallelChecker.
 print_warning(Message, Diagnostic) ->
@@ -29,7 +30,8 @@ print_warning(Message, Diagnostic) ->
   Snippet = read_snippet(File, Position),
   Span = get_span(Diagnostic),
   Output = format_snippet(Position, File, Message, Snippet, warning, S, Span),
-  io:put_chars(standard_error, [Output, $\n, $\n]).
+  ok.
+  %io:put_chars(standard_error, [Output, $\n, $\n]).
 
 %% Called by Module.ParallelChecker.
 print_warning_group(Message, [Diagnostic | Others]) ->
@@ -44,7 +46,8 @@ print_warning_group(Message, [Diagnostic | Others]) ->
     _ -> max(4, LineDigits + 2)
   end,
   Locations = [["\n", n_spaces(Padding), "└─ ", 'Elixir.Exception':format_stacktrace_entry(ES)] || #{stacktrace := [ES]} <- Others],
-  io:put_chars(standard_error, [Formatted, Locations, $\n, $\n]).
+  ok.
+  %io:put_chars(standard_error, [Formatted, Locations, $\n, $\n]).
 
 get_span(#{span := nil}) -> nil;
 get_span(#{span := Span}) -> Span.
@@ -93,7 +96,8 @@ print_diagnostic(#{severity := Severity, message := M, stacktrace := Stacktrace,
       false -> [["\n  ", 'Elixir.Exception':format_stacktrace_entry(E)] || E <- Stacktrace]
     end,
 
-  io:put_chars(standard_error, [Output, MaybeStack, $\n, $\n]),
+  %io:put_chars(standard_error, [Output, MaybeStack, $\n, $\n]),
+  ok,
   Diagnostic.
 
 emit_diagnostic(Severity, Position, File, Message, Stacktrace, Options) ->

@@ -642,7 +642,7 @@ defmodule Code do
   @spec print_diagnostic(diagnostic(:warning | :error), keyword()) :: :ok
   def print_diagnostic(diagnostic, opts \\ []) do
     read_snippet? = Keyword.get(opts, :snippet, true)
-    :elixir_errors.print_diagnostic(diagnostic, read_snippet?)
+    #:elixir_errors.print_diagnostic(diagnostic, read_snippet?)
     :ok
   end
 

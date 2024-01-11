@@ -215,7 +215,7 @@ defmodule Kernel.ParallelCompiler do
   @doc false
   # TODO: Deprecate me on Elixir v1.19
   def print_warning({file, location, warning}) do
-    :elixir_errors.print_warning(location, file, warning)
+    :ok
   end
 
   @doc false

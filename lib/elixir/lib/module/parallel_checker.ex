@@ -308,17 +308,9 @@ defmodule Module.ParallelChecker do
     Enum.flat_map(warnings, fn {module, warning, locations} ->
       message = module.format_warning(warning)
       diagnostics = Enum.map(locations, &to_diagnostic(message, &1))
-      log? and print_warning(message, diagnostics)
+      #log? and print_warning(message, diagnostics)
       diagnostics
     end)
-  end
-
-  defp print_warning(message, [diagnostic]) do
-    :elixir_errors.print_warning(message, diagnostic)
-  end
-
-  defp print_warning(message, grouped_warnings) do
-    :elixir_errors.print_warning_group(message, grouped_warnings)
   end
 
   defp to_diagnostic(message, {file, position, mfa}) when is_list(position) do
