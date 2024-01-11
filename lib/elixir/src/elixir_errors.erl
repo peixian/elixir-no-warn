@@ -96,8 +96,12 @@ print_diagnostic(#{severity := Severity, message := M, stacktrace := Stacktrace,
       false -> [["\n  ", 'Elixir.Exception':format_stacktrace_entry(E)] || E <- Stacktrace]
     end,
 
+  case Severity of
+    error -> io:put_chars(standard_error, [Output, MaybeStack, $\n, $\n]);
+    _ -> ok
+  end,
   %io:put_chars(standard_error, [Output, MaybeStack, $\n, $\n]),
-  ok,
+  %%ok,
   Diagnostic.
 
 emit_diagnostic(Severity, Position, File, Message, Stacktrace, Options) ->
